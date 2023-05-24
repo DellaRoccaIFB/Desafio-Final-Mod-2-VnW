@@ -1,7 +1,7 @@
+import NavGenders from "./NavGenders/NavGenders"
 import Lançamentos from "./Popular_Component/Lançamentos"
 import EmAlta from "./EmAlta/EmAlta"
-
-import NavGenders from "./NavGenders/NavGenders"
+import PagesButton from "./PagesButton/PagesButton"
 import styled from "styled-components"
 
 const MainContainer = styled.main `
@@ -14,6 +14,7 @@ export default function Main(){
             <NavGenders/>
             <Lançamentos/>
             <EmAlta/>
+            <PagesButton/>
         </MainContainer>
     )
 }

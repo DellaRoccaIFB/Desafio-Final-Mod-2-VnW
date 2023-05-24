@@ -3,6 +3,12 @@ import styled from "styled-components"
 export const ContainerLançamentos = styled.section `
     position: relative;
     cursor: pointer;
+    transition: all 300ms;
+    height: 35.15625vw;
+    max-height: 360px;
+    &:hover {
+        transform: scale(1.03);
+    }
 `
 export const MovieDescription = styled.p `
     padding: 1vw 1vw;
@@ -41,5 +47,5 @@ export const ReleaseDate = styled.h4 `
     color: #FFFFFF;
     font-size: clamp(1px, 1.17vw, 12px);
     font-weight: 300;
-    visibility: ${(props)=>{props.visibilityTitle}};
+    visibility: ${(props)=>{props.visibilityDate}};
 `

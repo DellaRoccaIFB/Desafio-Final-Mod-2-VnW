@@ -9,11 +9,24 @@ export default function Lançamentos() {
   const [visibilityDescription, setVisibilityDescription] = useState("hidden")
   const [visibilityTitle, setvisibilityTitle] = useState("visible")
   const [opacity, setOpacity] = useState("1")
+  const [ativar, setAtivar] = useState(true)
 
   const ShowContent = () => {
-    visibilityDescription === "hidden" ? setVisibilityDescription("visible") : setVisibilityDescription("hidden")
-    visibilityTitle === "visible" ? setvisibilityTitle("hidden") : setvisibilityTitle("visible")
-    opacity === "1" ? setOpacity("0.2") : setOpacity("1")
+    visibilityDescription === "hidden" ? setVisibilityDescription("visible") : setVisibilityDescription("hidden");
+    visibilityTitle === "visible" ? setvisibilityTitle("hidden") : setvisibilityTitle("visible");
+    opacity === "1" ? setOpacity("0.2") : setOpacity("1");
+  }
+  
+  const AtivarConteudo = () => {
+    setAtivar(!ativar)
+  }
+
+  const ShowTitle = () => {
+    return(
+      <>
+            
+      </>
+    )
   }
 
   useEffect(() => {
@@ -42,11 +55,13 @@ export default function Lançamentos() {
     <S.H3>Últimos lançamentos</S.H3>
       <Carousel>
         {filmes.map((item) => (
-          <S.ContainerLançamentos onClick={()=>{ShowContent()}}>
+          <S.ContainerLançamentos onClick={()=>{ShowContent(), AtivarConteudo()}}>
             <S.MovieDescription  visibility={visibilityDescription}><S.MovieTitle>{item.title}</S.MovieTitle> {item.overview}</S.MovieDescription>
             <S.MovieImg opacity={opacity} src={item.image} alt={item.title} />
+            {ativar && <>
             <S.MovieTitle visibilityTitle={visibilityTitle}>{item.title}</S.MovieTitle>
-            <S.ReleaseDate visibilityTitle={visibilityTitle}>{item.release_date.substring(0, 4)}</S.ReleaseDate>
+            <S.ReleaseDate visibilityDate={visibilityTitle}>{item.release_date.substring(0, 4)}</S.ReleaseDate>
+            </>}
           </S.ContainerLançamentos>
         ))}
       </Carousel>

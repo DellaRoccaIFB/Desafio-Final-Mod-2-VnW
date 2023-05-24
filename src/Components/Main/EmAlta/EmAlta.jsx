@@ -1,17 +1,21 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import * as S from "./Styles_EmAlta"
+import * as S from "./Styles_EmAlta";
 
 export default function EmAlta() {
   const [filmes, setFilmes] = useState([]);
-  const [visibility, setVisibility] = useState("hidden")
-  const [opacity, setOpacity] = useState("1")
+  const [visibility, setVisibility] = useState("hidden");
+  const [opacity, setOpacity] = useState("1");
+  const [ativar, setAtivar] = useState(true);
 
   const ShowContent = () => {
-    visibility === "hidden" ? setVisibility("visible") : setVisibility("hidden")
-    opacity === "1" ? setOpacity("0.2") : setOpacity("1")
-  }
+    visibility === "hidden"
+      ? setVisibility("visible")
+      : setVisibility("hidden");
+    opacity === "1" ? setOpacity("0.2") : setOpacity("1");
+    setAtivar(!ativar);
+  };
 
   useEffect(() => {
     getFilmes();
@@ -36,20 +40,32 @@ export default function EmAlta() {
 
   return (
     <>
-    <S.H3>Em Alta</S.H3>
-    <S.ContainerEmAlta>
-
+      <S.H3>Em Alta</S.H3>
+      <S.ContainerEmAlta>
         {filmes.map((item) => (
-            <>
-                <S.CardsEmAlta  onClick={()=>{ShowContent()}}>
-                    <S.MovieImg src={item.image} alt={item.title} />
-                    <S.MovieTitle>{item.title}</S.MovieTitle>
-                    <S.ReleaseDate>{item.release_date.substring(0, 4)}</S.ReleaseDate>
-                </S.CardsEmAlta>
-
-            </>
+          <>
+            <S.CardsEmAlta
+              onClick={() => {
+                ShowContent();
+              }}
+            >
+              <S.MovieDescription visibility={visibility}>
+                <S.MovieTitle>{item.title}</S.MovieTitle>
+                {item.overview}
+              </S.MovieDescription >
+              <S.MovieImg opacity={opacity} src={item.image} alt={item.title} />
+              {ativar && (
+                <>
+                  <S.MovieTitle>{item.title}</S.MovieTitle>
+                  <S.ReleaseDate>
+                    {item.release_date.substring(0, 4)}
+                  </S.ReleaseDate>
+                </>
+              )}
+            </S.CardsEmAlta>
+          </>
         ))}
-    </S.ContainerEmAlta>
+      </S.ContainerEmAlta>
     </>
   );
 }
